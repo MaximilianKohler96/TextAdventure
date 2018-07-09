@@ -5,7 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI"
         mc:Ignorable="d"
+        FontFamily="DokChampa"
+        FontSize="12pt"
         Title="Text Adventure - The Tales of Ubuntu" Height="900" Width="1200">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,10 +26,102 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Menu" Background="LightSlateGray"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="Player Data" Background="CadetBlue"/>
-        <Label Grid.Row="1" Grid.Column="1" Content="Game Data" Background="SlateGray"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Inventory/Quests" Background="DarkCyan"/>
-        <Label Grid.Row="2" Grid.Column="1" Content="Interacting/Combat/Movement Controls" Background="CadetBlue"/>
+
+        <Grid Grid.Row="1" Grid.Column="0" Background="CadetBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>                
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Name: "/>
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding CurrentPlayer.Name}"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Class: "/>
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding CurrentPlayer.CharacterClass}"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Hitpoints: "/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding CurrentPlayer.Hitpoints}"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Gold: "/>
+            <Label Grid.Row="3" Grid.Column="1" Content="{Binding CurrentPlayer.Gold}"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="XP: "/>
+            <Label Grid.Row="4" Grid.Column="1" Content="{Binding CurrentPlayer.ExperiencePoints}"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="Level: "/>
+            <Label Grid.Row="5" Grid.Column="1" Content="{Binding CurrentPlayer.Level}"/>        
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.Column="1"  Background="SlateGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="1" BorderBrush="DarkSlateGray" BorderThickness="1">
+                <Grid Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text="{Binding CurrentLocation.Name}"/>
+                    <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Source="{Binding CurrentLocation.ImageName}"/>
+                    <TextBlock Grid.Row="3" HorizontalAlignment="Center" Text="{Binding CurrentLocation.Description}"/>
+                    
+                </Grid>
+                
+            </Border>
+            
+        </Grid>
         
+        <Label Grid.Row="2" Grid.Column="0" Content="Inventory/Quests" Background="DarkCyan"/>
+
+
+        <Grid Grid.Row="2" Grid.Column="1"  Background="CadetBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="1" Content="North" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveNorth" Visibility="{Binding HasLocationToNorth, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="West" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveWest" Visibility="{Binding HasLocationToWest, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="2" Grid.Column="1" Content="South" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveSouth" Visibility="{Binding HasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="East" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveEast" Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"/>
+                
+
+            </Grid>
+            
+        </Grid>
+        
+
     </Grid>
 </Window>
