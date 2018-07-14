@@ -19,7 +19,7 @@ namespace Engine.Factories
             itemsToComplete.Add(new ItemQuantity(2001, 2));
             rewardItems.Add(new ItemQuantity(1002, 1));
 
-            _quests.Add(new Quest(1, "Make the Herb Garden Safe", "Defeat the snakes in the Herb garden", itemsToComplete, 25, 10, rewardItems));
+            _quests.Add(new Quest(1, "Clear herb garden", "The herb garden is full of poisonous snakes. Defeat the snakes in the Herb garden", itemsToComplete, 25, 10, rewardItems));
         }
 
         internal static Quest GetQuestByID(int id)
