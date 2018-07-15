@@ -125,7 +125,7 @@
             </Border>
 
         </Grid>
-        
+
         <!-- Inventory Quests -->
         <Grid Grid.Row="2"  Grid.Column="0" Background="DarkCyan">
             <TabControl>
@@ -179,29 +179,30 @@
 
                 <Button Grid.Row="0" Grid.Column="2" Content="Use" Background="LightSlateGray" Click="OnClick_AttackMonster"/>
             </Grid>
-            
-                <!-- Movement -->
-                <Grid Grid.Row="0" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+            <!-- Movement -->
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                    <Button Grid.Row="0" Grid.Column="1" Content="North" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveNorth" Visibility="{Binding HasLocationToNorth, Converter={StaticResource BooleanToVisibility}}"/>
-                    <Button Grid.Row="1" Grid.Column="0" Content="West" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveWest" Visibility="{Binding HasLocationToWest, Converter={StaticResource BooleanToVisibility}}"/>
-                    <Button Grid.Row="2" Grid.Column="1" Content="South" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveSouth" Visibility="{Binding HasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"/>
-                    <Button Grid.Row="1" Grid.Column="2" Content="East" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveEast" Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"/>
-                </Grid>
-                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="1" Content="North" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveNorth" Visibility="{Binding HasLocationToNorth, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="West" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveWest" Visibility="{Binding HasLocationToWest, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="2" Grid.Column="1" Content="South" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveSouth" Visibility="{Binding HasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="East" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_MoveEast" Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="1" Grid.Column="1" Content="Trade" Height="60" Width="100" Margin ="10" Background="LightSlateGray" Click="OnClick_DisplayTradeScreen" Visibility="{Binding HasTrader, Converter={StaticResource BooleanToVisibility}}"/>
             </Grid>
-            
+
         </Grid>
+
+    </Grid>
 
 </Window>
