@@ -6,11 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Engine.Classes;
 using Engine.Factories;
+using Engine.EventArgs;
 
 namespace Engine.ViewModels
 {
     public class GameSession : BaseNotificationClass
     {
+        public event EventHandler<GameMessageEventArgs> OnMessageRaised;
+
         private Location _currentLocation;
         private Monster _currentMonster;
 
@@ -44,6 +47,12 @@ namespace Engine.ViewModels
 
                 OnPropertyChanged(nameof(CurrentMonster));
                 OnPropertyChanged(nameof(HasMonster));
+
+                if (CurrentMonster != null)
+                {
+                    RaiseMessage("");
+                    RaiseMessage($"There suddenly appears a wild {CurrentMonster.Name}!");
+                }
             }
         }
 
@@ -120,6 +129,11 @@ namespace Engine.ViewModels
         private void GetMonsterAtLocation()
         {
             CurrentMonster = CurrentLocation.GetMonster();
+        }
+
+        private void RaiseMessage(string message)
+        {
+            OnMessageRaised?.Invoke(this, new GameMessageEventArgs(message));
         }
     }
 }
