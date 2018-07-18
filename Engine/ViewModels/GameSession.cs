@@ -152,7 +152,6 @@ namespace Engine.ViewModels
                 {
                     if (CurrentPlayer.HasAllTheseItems(quest.ItemsToComplete))
                     {
-                        // Remove the quest completion items from the player's inventory
                         foreach (ItemQuantity itemQuantity in quest.ItemsToComplete)
                         {
                             for (int i = 0; i < itemQuantity.Quantity; i++)
@@ -164,7 +163,6 @@ namespace Engine.ViewModels
                         RaiseMessage("");
                         RaiseMessage($"You completed the '{quest.Name}' quest");
 
-                        // Give the player the quest rewards
                         CurrentPlayer.ExperiencePoints += quest.RewardExperiencePoints;
                         RaiseMessage($"You receive {quest.RewardExperiencePoints} experience points");
 
@@ -179,7 +177,6 @@ namespace Engine.ViewModels
                             RaiseMessage($"You receive a {rewardItem.Name}");
                         }
 
-                        // Mark the Quest as completed
                         questToComplete.IsCompleted = true;
                     }
                 }
@@ -228,7 +225,6 @@ namespace Engine.ViewModels
                 return;
             }
 
-            // Determine damage to monster
             int damageToMonster = RandomNumberGenerator.NumberBetween(CurrentWeapon.MinimumDamage, CurrentWeapon.MaximumDamage);
 
             if (damageToMonster == 0)
@@ -241,7 +237,6 @@ namespace Engine.ViewModels
                 RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} points.");
             }
 
-            // If monster if killed, collect rewards and loot
             if (CurrentMonster.HitPoints <= 0)
             {
                 RaiseMessage("");
@@ -260,12 +255,10 @@ namespace Engine.ViewModels
                     RaiseMessage($"You receive {itemQuantity.Quantity} {item.Name}.");
                 }
 
-                // Get another monster to fight
                 GetMonsterAtLocation();
             }
             else
             {
-                // If monster is still alive, let the monster attack
                 int damageToPlayer = RandomNumberGenerator.NumberBetween(CurrentMonster.MinimumDamage, CurrentMonster.MaximumDamage);
 
                 if (damageToPlayer == 0)
@@ -278,14 +271,13 @@ namespace Engine.ViewModels
                     RaiseMessage($"The {CurrentMonster.Name} hit you for {damageToPlayer} points.");
                 }
 
-                // If player is killed, move them back to their home.
                 if (CurrentPlayer.HitPoints <= 0)
                 {
                     RaiseMessage("");
                     RaiseMessage($"The {CurrentMonster.Name} killed you.");
 
-                    CurrentLocation = CurrentWorld.LocationAt(0, -1); // Player's home
-                    CurrentPlayer.HitPoints = CurrentPlayer.Level * 10; // Completely heal the player
+                    CurrentLocation = CurrentWorld.LocationAt(0, -1);
+                    CurrentPlayer.HitPoints = CurrentPlayer.Level * 10;
                 }
             }
         }
